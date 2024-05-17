@@ -1,5 +1,7 @@
 package org.launchcode.techjobs.oo;
 
+import org.junit.Test;
+
 import java.util.Objects;
 
 public class Job {
@@ -93,4 +95,32 @@ public class Job {
     public CoreCompetency getCoreCompetency() {
         return coreCompetency;
     }
+
+    // TODO: code toString method
+    @Override
+    public String toString() {
+        String dataError = "Data not available";
+        if(name == null || name == "") {
+            name = dataError;
+        }
+        if(employer == null || employer.getValue() == "") {
+            employer.setValue(dataError);
+        }
+        if(location == null || location.getValue() == "") {
+            location.setValue(dataError);
+        }
+        if(positionType == null || positionType.getValue() == "") {
+            positionType.setValue(dataError);
+        }
+        if(coreCompetency == null || coreCompetency.getValue() == "") {
+            coreCompetency.setValue(dataError);
+        }
+        return System.lineSeparator() +
+                "ID: " + id + System.lineSeparator() +
+                "Name: " + name + System.lineSeparator() +
+                "Employer: " + employer + System.lineSeparator() +
+                "Location: " + location + System.lineSeparator() +
+                "Position Type: " + positionType + System.lineSeparator() +
+                "Core Competency: " + coreCompetency + System.lineSeparator();
+        }
 }

@@ -8,6 +8,7 @@ public class JobTest {
 
     @Test
     public void testSettingJobId() {
+
         Job job1 = new Job();
         Job job2 = new Job();
 
@@ -16,6 +17,7 @@ public class JobTest {
 
     @Test
     public void testJobConstructorSetsAllFields() {
+
         // new job object
          Job job = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
@@ -36,6 +38,7 @@ public class JobTest {
 
     @Test
     public void testJobsForEquality() {
+
         // create two new job objects with identical values (minus id)
         Job job1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
@@ -45,5 +48,48 @@ public class JobTest {
         assertNotEquals(job1, job2);
     }
 
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+
+        // create job object
+        Job job = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+        assertEquals("The string should start with a new line character", System.lineSeparator(), String.valueOf(job.toString().charAt(0)));
+        assertEquals("The string should end with a new line character", System.lineSeparator(), String.valueOf(job.toString().charAt(job.toString().length()-1)));
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+
+        // create job object
+        Job job = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+        // define expected string with correct formatting
+        String expected = System.lineSeparator() +
+                "ID: " + job.getId() + System.lineSeparator() +
+                "Name: Product tester" + System.lineSeparator() +
+                "Employer: ACME" + System.lineSeparator() +
+                "Location: Desert" + System.lineSeparator() +
+                "Position Type: Quality control" + System.lineSeparator() +
+                "Core Competency: Persistence" + System.lineSeparator();
+
+        // test toString method returns expected string
+        assertEquals(expected, job.toString());
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+
+        Job job = new Job("", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+        String emptyJobValues = System.lineSeparator() +
+                "ID: " + job.getId() + System.lineSeparator() +
+                "Name: Data not available" + System.lineSeparator() +
+                "Employer: " + job.getEmployer() + System.lineSeparator() +
+                "Location: " + job.getLocation() + System.lineSeparator() +
+                "Position Type: " + job.getPositionType() + System.lineSeparator() +
+                "Core Competency: " + job.getCoreCompetency() + System.lineSeparator();
+        assertEquals(emptyJobValues, job.toString());
+    }
 
 }
