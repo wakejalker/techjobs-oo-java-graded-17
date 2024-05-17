@@ -1,7 +1,5 @@
 package org.launchcode.techjobs.oo;
 
-import org.junit.Test;
-
 import java.util.Objects;
 
 public class Job {
